@@ -15,7 +15,7 @@
             permissive such that it accomodates all    datamodels, but validating documents may
             contain markup that    is ignored in certain datamodels.   </xsd:documentation>
     </xsd:annotation>
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd">
         <xsd:annotation>
             <xsd:documentation>     This import brings in the XML namespace attributes     The XML
                 attributes are used by various modules.    </xsd:documentation>
@@ -555,6 +555,22 @@
         <xsd:attributeGroup ref="scxml.log.attlist"/>
     </xsd:complexType>
     <xsd:element name="log" type="scxml.log.type"/>
+    <xsd:attributeGroup name="scxml.request.attlist">
+        <xsd:attribute name="url" type="xsd:string"/>
+        <xsd:attribute name="id" type="xsd:string"/>
+        <xsd:attribute name="method" type="xsd:string"/>
+        <xsd:attributeGroup ref="scxml.extra.attribs"/>
+    </xsd:attributeGroup>
+    <xsd:group name="scxml.request.content">
+        <xsd:sequence>
+            <xsd:group maxOccurs="unbounded" minOccurs="0" ref="scxml.extra.content"/>
+        </xsd:sequence>
+    </xsd:group>
+    <xsd:complexType name="scxml.request.type">
+        <xsd:group ref="scxml.request.content"/>
+        <xsd:attributeGroup ref="scxml.request.attlist"/>
+    </xsd:complexType>
+    <xsd:element name="request" type="scxml.request.type"/>
     <xsd:annotation>
         <xsd:documentation>             This is the XML Schema data module for SCXML             *
             datamodel              * data             * assign             * param             *
@@ -678,6 +694,7 @@
         <xsd:attribute default="0s" name="delay" type="Duration.datatype"/>
         <xsd:attribute name="delayexpr" type="ValueLang.datatype"/>
         <xsd:attribute name="namelist" type="xsd:string"/>
+        <xsd:attribute name="contentexpr" type="xsd:string"/>
         <xsd:attributeGroup ref="scxml.extra.attribs"/>
     </xsd:attributeGroup>
     <xsd:group name="scxml.send.mix">
@@ -780,6 +797,7 @@ This gathers them up into a single type -->
             <xsd:element ref="assign"/>
             <xsd:element ref="log"/>
             <xsd:element ref="cancel"/>
+            <xsd:element ref="request"/>
         </xsd:choice>
     </xsd:group>
 </xsd:schema>
