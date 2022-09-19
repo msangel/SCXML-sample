@@ -42,5 +42,11 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
             <version>3.2.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.onehippo.cms7</groupId>
+            <artifactId>hippo-repository-workflow</artifactId>
+            <version>15.1.0</version>
+        </dependency>
+
     </dependencies>
 </project>
