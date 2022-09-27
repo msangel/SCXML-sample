@@ -279,12 +279,12 @@
                         </if>
                         <!-- copy it to draft first, unless we're already editor -->
                         <hippo:copyVariant sourceState="unpublished" targetState="draft"/>
-                        <elseif cond="!!published"/>
+                    <elseif cond="!!published"/>
                         <!-- else if published document exists: first copy it to unpublished -->
                         <hippo:copyVariant sourceState="published" targetState="unpublished"/>
                         <if cond="live">
                             <hippo:configVariant variant="published" availabilities="live"/>
-                            <else/>
+                        <else/>
                             <hippo:configVariant variant="published" availabilities=""/>
                         </if>
                         <hippo:configVariant variant="unpublished" versionable="true" availabilities="preview"/>
@@ -330,7 +330,7 @@
                              remove possible 'preview' availability from the published variant -->
                         <if cond="live">
                             <hippo:configVariant variant="published" availabilities="live"/>
-                            <else/>
+                        <else/>
                             <hippo:configVariant variant="published" availabilities=""/>
                         </if>
                     </if>
@@ -383,7 +383,7 @@
                                         <!-- if request for publish: enable accept operation if modified and not editing -->
                                         <hippo:requestAction identifierExpr="request.identity" action="acceptRequest" enabledExpr="modified and !editing"/>
                                     </elseif>
-                                    <elseif cond="request.workflowType=='depublish'"/>
+                                <elseif cond="request.workflowType=='depublish'"/>
                                     <!-- if request for depublish: enable accept operation if live and not editing -->
                                     <hippo:requestAction identifierExpr="request.identity" action="acceptRequest" enabledExpr="live and !editing"/>
                                 </if>
@@ -392,7 +392,7 @@
                                     <hippo:requestAction identifierExpr="request.identity" action="cancelRequest" enabledExpr="true"/>
                                 </if>
                                 <!-- when not an editor user (not granted hippo:editor) then: -->
-                                <elseif cond="request?.owner==user"/>
+                            <elseif cond="request?.owner==user"/>
                                 <!-- if request owner: enable cancel operation -->
                                 <hippo:requestAction identifierExpr="request.identity" action="cancelRequest" enabledExpr="true"/>
                             </if>
@@ -428,7 +428,7 @@
                         <send event="workflowType"/>
                         <!-- log the workflowType after it has been processed -->
                         <send event="'logEvent.'+workflowType"/>
-                        <else/>
+                    <else/>
                         <!-- the request did have a targetDate: trigger a 'scheduled' workflow action event -->
                         <send event="workflowType" namelist="targetDate"/>
                     </if>
